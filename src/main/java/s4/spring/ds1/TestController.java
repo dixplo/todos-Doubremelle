@@ -1,5 +1,6 @@
 package s4.spring.ds1;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import s4.spring.ds1.repositories.TodosRepository;
 
 @Controller
 public class TestController {
-
 	@Autowired
 	private VueJS vue;
 	
@@ -22,21 +22,21 @@ public class TestController {
 	private TodosRepository repo;
 	
 	@RequestMapping("/todos")
-	public String indexSpa(ModelMap model) {
+	public String indexTodos(ModelMap model) {
 		List<Todos> todos=repo.findAll();
 		vue.addData("items",todos);
 		vue.addData("dialog",false);
-		vue.addData("message");
-		vue.addDataRaw("todo","{label:'',description:''}");
+		vue.addDataRaw("todos","{todo:'label',description:'',avancement:'',poids:'',}");
 		
-		vue.addMethod("addTodos","let self=this;"+Http.post("/todos/add/post", "this.todos","self.dialog=false;"
-				+ "self.message='Todos ajoutée';"
-				+ "self.items.push(response.data);self.todos={};"));
+		vue.addMethod("addTodo", "let self=this;"+Http.post("/rest/todos/create", "this.todos", "self.dialog=false;"
+				+ "self.items.push(response.data);self.todo={};"));
 		
-		vue.addMethod("deleteTodos",
-				"let self=this;let $='';"+Http.delete("'/todos/delete/'+item.id+$","self.message=response.data;"
-						+ "self.items.splice(index,1);",""),"item","index");
+		vue.addMethod("updateTodo", "let self=this;self.dialog=true;self.todo=todo","todo");
+		
+		vue.addMethod("deleteTodo", 
+					"let self=this;let $='';"+Http.delete("'/rest/todos/'+item.id+$","self.message=response.data;"
+					+ "self.items.splice(index,1);"),"item","index");
 		model.put("vue", vue);
-		return "todos";
+	return "todos";
 	}
 }

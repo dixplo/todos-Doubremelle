@@ -1,11 +1,12 @@
 {{>header}}
-<v-btn color="" @click="loadGroupes">Groupes</v-btn>
+{{>add}}
+
 <ul>
-  <li v-for="(item,index) in items" :key="item.id">
+  <li v-for="(item, index) in items" :key="item.id">
     <% item %>
-    <v-btn @click="deleteOrga(item,index)"small>x</v-btn>
+    <v-btn @click="deleteTodo(item,index)" small>x</v-btn>
   </li>
 </ul>
-{{>add}}
+
 {{>footer}}
 {{{vue}}}

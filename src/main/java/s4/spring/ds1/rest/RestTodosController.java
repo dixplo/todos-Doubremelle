@@ -53,7 +53,7 @@ public class RestTodosController {
 		return orga;
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<String> delete(@PathVariable int id) {
 		todosRepository.deleteById(id);
 		return new ResponseEntity<String>("Suppression réussie !", HttpStatus.OK);

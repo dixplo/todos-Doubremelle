@@ -1,10 +1,9 @@
-<v-btn color="primary" @click="dialog=!dialog">Ajouter une organisation</v-btn>
+<v-btn color="red" @click="dialog=!dialog">Ajouter un todo</v-btn>
 <form v-show="dialog">
+<input type="text" v-model="todos.label" placeholder="Label..."></br>
+<input type="text" v-model="todos.description" placeholder="description..."></br>
+<input type="float" v-model="todos.avancement" placeholder="avancement..."></br>
+<input type="int" v-model="todos.poids" placeholder="poids..."></br>
 
-<input type="text" v-model="todo.label" placeholder="Label">
-<input type="text" v-model="todo.description" placeholder="Description">
-<input type="float" v-model="todo.avancement" placeholder="Avancement">
-
-<v-btn color="success" @click="addtodos">Valider</v-btn>
-
+<v-btn color="success" @click="addTodo">Valider</v-btn>
 </form>
